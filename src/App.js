@@ -1,19 +1,40 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { createBrowserRouter,Outlet,RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./utils/store";
 import Navbar from "./components/Navbar";
+import ProductDetail from "./components/ProductDetail";
 import ProductListing from "./components/ProductListing";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const App = () => {
     return(
-        <div>
+        <Provider store={store}>
             <Navbar/>
-            <ProductListing/>
-        </div>
+            <Outlet/>
+        </Provider>
     )
 }
 
+const appRouter = createBrowserRouter([
+    {
+        path: "/",
+        element: <App/>,
+        children: [
+            {
+                path: '/',
+                element: <ProductListing/>,
+            },
+            {
+                path: '/products/:id',
+                element: <ProductDetail/>,
+            },
+        ]
+    }
+]);
 
 
-root.render(<App/>)
+
+root.render(<RouterProvider router={appRouter}/>)

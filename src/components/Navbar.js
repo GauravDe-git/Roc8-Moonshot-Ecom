@@ -1,14 +1,21 @@
 import React from "react";
-import  FaShopify  from "react-icons/fi";
-import  IoLogoShopify  from "react-icons/io5";
+import  {FcShop}  from "react-icons/fc";
+import  {FiShoppingCart}  from "react-icons/fi";
 
-const Navbar = () => {
+const Navbar = ({cartItemsCount}) => {
   return (
     <nav className="bg-gray-900 text-white px-4 py-3 flex justify-between items-center">
       <div>
+        <FcShop size={32} />
       </div>
       <div className="relative">
         <button className="bg-gray-900 p-2 rounded-full">
+          <FiShoppingCart size={24} />
+          {cartItemsCount > 0 && (
+            <span className="bg-yellow-500 text-xs absolute top-0 right-0 rounded-full h-4 w-4 flex items-center justify-center">
+              {cartItemsCount}
+            </span>
+          )}
         </button>
       </div>
     </nav>
