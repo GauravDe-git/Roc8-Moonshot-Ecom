@@ -6,6 +6,7 @@ import { store } from "./utils/store";
 import Navbar from "./components/Navbar";
 import ProductDetail from "./components/ProductDetail";
 import ProductListing from "./components/ProductListing";
+import CartPage from "./components/CartPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -30,6 +31,10 @@ const appRouter = createBrowserRouter([
             {
                 path: '/products/:id',
                 element: <ProductDetail/>,
+            },
+            {
+                path: '/cart',
+                element: <CartPage/>,
             },
         ]
     }

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 const ProductListing = () => {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -31,6 +34,11 @@ const ProductListing = () => {
 
   const handleSearchInputChange = (event) => {
     setSearchTerm(event.target.value);
+  };
+
+  const handleAddToCart = (product) => {
+    alert("Item added to cart!");
+    dispatch(addItem({ ...product, count: 1 }));
   };
 
   return (
@@ -69,9 +77,12 @@ const ProductListing = () => {
                   {truncateDescription(product.description)}
                 </p>
               </Link>
-              <div className="flex justify-between mt-4">
+              <div className="flex justify-between items-center">
                 <span className="font-bold text-xl">${product.price}</span>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  onClick={() => handleAddToCart(product)}
+                >
                   Add to cart
                 </button>
               </div>
